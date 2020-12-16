@@ -3,6 +3,7 @@ package com.mobipix;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mFalseButton;
     private Button mNextButton;
     private TextView mQuestionTextView;
+    private static final String KEY_INDEX = "index";
 
     private Question[] mQuestionBank = new Question[] {
             new Question(R.string.question_australia, true),
@@ -30,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(savedInstanceState != null){
+            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX,0);
+        }
 
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
         int question = mQuestionBank[mCurrentIndex].getmTextResId();
@@ -68,6 +74,43 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        Log.i("onSavedInstance","onSavedInstance");
+        savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        Log.d("Main", "onStart");
+
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        Log.d("Main", "onResume");
+
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        Log.d("Main", "onPause");
+
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        Log.d("Main", "onStop");
+
     }
 
     private void updateQuestion(){
@@ -88,4 +131,6 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
     }
+
+
 }
