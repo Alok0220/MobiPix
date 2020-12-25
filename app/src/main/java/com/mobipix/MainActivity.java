@@ -2,6 +2,7 @@ package com.mobipix;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,11 +10,27 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/*
+
+Below are types of Components :-
+-----------------------------------
+
+Service
+
+Broad cast Receivers
+
+Content providers
+
+intents
+
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mNextButton;
+    private Button mCheatButton;
     private TextView mQuestionTextView;
     private static final String KEY_INDEX = "index";
 
@@ -36,6 +53,16 @@ public class MainActivity extends AppCompatActivity {
         if(savedInstanceState != null){
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX,0);
         }
+
+        mCheatButton = (Button)findViewById(R.id.cheat_button);
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              // Start CheatActivity
+                Intent intent = new Intent(MainActivity.this, CheatActivity.class);
+                startActivity(intent);
+            }
+        });
 
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
         int question = mQuestionBank[mCurrentIndex].getmTextResId();
