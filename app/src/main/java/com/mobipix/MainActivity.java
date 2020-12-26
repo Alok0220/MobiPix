@@ -2,6 +2,7 @@ package com.mobipix;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private Button mCheatButton;
     private TextView mQuestionTextView;
     private static final String KEY_INDEX = "index";
+    private final int REQUEST_CODE_CHEAT = 0;
+    private boolean mIsCheater;
 
     private Question[] mQuestionBank = new Question[] {
             new Question(R.string.question_australia, true),
@@ -59,8 +62,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
               // Start CheatActivity
-                Intent intent = new Intent(MainActivity.this, CheatActivity.class);
-                startActivity(intent);
+                boolean answerIsTrue = mQuestionBank[mCurrentIndex].getmAnswerTrue();
+                Log.d("Inside Main Ans", "Main ANS "+answerIsTrue);
+                //Intent intent = new Intent(MainActivity.this, CheatActivity.class);
+                Intent intent = CheatActivity.newIntent(MainActivity.this, answerIsTrue);
+                startActivityForResult(intent, REQUEST_CODE_CHEAT);
             }
         });
 
@@ -93,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         mNextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                mIsCheater = false;
                 //on next click
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
                 //int question = mQuestionBank[mCurrentIndex].getmTextResId();
@@ -104,6 +111,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+    }
+
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState){
@@ -149,7 +167,9 @@ public class MainActivity extends AppCompatActivity {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].getmAnswerTrue();
         int messageResId = 0;
 
-        if(userPressedTrue == answerIsTrue){
+        if (mIsCheater) {
+            messageResId = R.string.judgment_toast;
+        } else if (userPressedTrue == answerIsTrue){
             messageResId = R.string.correct_toast;
         }
         else {
