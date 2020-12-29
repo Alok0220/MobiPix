@@ -7,6 +7,7 @@
     <string name="crime_title_label">label</string>
     <string name="crime_title_hint">hint</string>
     <string name="crime_details_label">detail</string>
+    <string name="fragment_conainer"></string>
     <string name="incorrect_toast">In Correct</string>
     <string name="next_button">Next</string>
     <string name="question_oceans">The Pacific Ocean is larger than the Atlantic Ocean.</string>

@@ -1,6 +1,8 @@
 package com.mobipix;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -53,8 +55,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        FragmentManager fm = getSupportFragmentManager();
+
+        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
+
+        if (fragment == null) {
+            fragment = new CrimeFragment();
+            fm.beginTransaction()
+                    .add(R.id.fragment_container, fragment)
+                    .commit();
+        }
 
     }
-
-
 }
+
+
