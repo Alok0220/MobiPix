@@ -28,7 +28,7 @@ intents
 
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends SingleFragmentActivity {
 
     private Button mTrueButton;
     private Button mFalseButton;
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
     private int mCurrentIndex = 0;
 
-    @Override
+    /*@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -66,7 +66,13 @@ public class MainActivity extends AppCompatActivity {
                     .commit();
         }
 
+    }*/
+
+    @Override
+    protected Fragment createFragment() {
+        return new CrimeFragment();
     }
+
 }
 
 
