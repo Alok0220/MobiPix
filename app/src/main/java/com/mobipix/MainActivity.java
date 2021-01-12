@@ -28,7 +28,8 @@ intents
 
  */
 
-public class MainActivity extends SingleFragmentActivity {
+public class MainActivity extends AppCompatActivity {
+        //extends SingleFragmentActivity {
 
     private Button mTrueButton;
     private Button mFalseButton;
@@ -39,23 +40,16 @@ public class MainActivity extends SingleFragmentActivity {
     private final int REQUEST_CODE_CHEAT = 0;
     private boolean mIsCheater;
 
-    private Question[] mQuestionBank = new Question[] {
-            new Question(R.string.question_australia, true),
-            new Question(R.string.question_oceans,true),
-            new Question(R.string.question_mideast, false),
-            new Question(R.string.question_africa, false),
-            new Question(R.string.question_americas, true),
-            new Question(R.string.question_asia, true)
-    };
+
 
     private int mCurrentIndex = 0;
 
-    /*@Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        FragmentManager fm = getSupportFragmentManager();
+        /*FragmentManager fm = getSupportFragmentManager();
 
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
 
@@ -64,14 +58,14 @@ public class MainActivity extends SingleFragmentActivity {
             fm.beginTransaction()
                     .add(R.id.fragment_container, fragment)
                     .commit();
-        }
+        }*/
 
-    }*/
+    }
 
-    @Override
+    /*@Override
     protected Fragment createFragment() {
         return new CrimeFragment();
-    }
+    }*/
 
 }
 
