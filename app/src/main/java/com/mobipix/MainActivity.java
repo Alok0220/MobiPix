@@ -49,6 +49,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        mTrueButton = (Button) findViewById(R.id.true_button);
+
+        mTrueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Does nothing yet, but soon!
+                Toast.makeText(MainActivity.this,
+                        R.string.correct_toast,
+                        Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        mFalseButton = (Button) findViewById(R.id.false_button);
+
+        mFalseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Does nothing yet, but soon!
+                Toast.makeText(MainActivity.this,
+                        R.string.incorrect_toast,
+                        Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+
         /*FragmentManager fm = getSupportFragmentManager();
 
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
@@ -61,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         }*/
 
     }
+
 
     /*@Override
     protected Fragment createFragment() {
